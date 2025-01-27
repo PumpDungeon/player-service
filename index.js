@@ -1,10 +1,14 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
 import Player from './entities/player/index.js';
+import PublicEndpoints from './api/index.js';
 
 const app = express();
 const port = 3000;
+
+app.use(express.json());
+
+app.use(PublicEndpoints);
 
 mongoose.connect('mongodb://localhost:27017/playerDB', {
     useNewUrlParser: true,

@@ -1,11 +1,8 @@
 import express from 'express';
 
-const router = express.Router();
-
-import PublicRoutes from './routes'
+import ApiEndpoints from './routes/index.js'
 
 const PublicEndpoints = express.Router({ mergeParams: true });
 
-PublicEndpoints.use('/api', PublicRoutes);
+PublicEndpoints.use('/api', ApiEndpoints);
 export default PublicEndpoints;
-module.exports = router;
