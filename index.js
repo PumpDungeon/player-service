@@ -2,15 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Player from './entities/player/index.js';
 import PublicEndpoints from './api/index.js';
-
+import dotenv from 'dotenv';
 const app = express();
 const port = 3000;
+
+dotenv.config();
 
 app.use(express.json());
 
 app.use(PublicEndpoints);
 
-mongoose.connect('mongodb://localhost:27017/playerDB', {
+mongoose.connect(process.env.MONGO_URL , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
