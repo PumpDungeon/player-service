@@ -1,5 +1,4 @@
 import Player from '../../../entities/player/index.js';
-import {broadcastMessage} from "../../../webSocket/index.js";
 
 export const getPlayer = async (req, res) => {
     const playerData = await Player.findOne();

@@ -10,7 +10,6 @@ export const initWebSocket = (httpServer) => {
 
         ws.on('message', (message) => {
             console.log('Message reçu:', message.toString());
-            // Exemple de broadcast à tous les clients
             wss.clients.forEach(client => {
                 if (client !== ws && client.readyState === WebSocket.OPEN) {
                     client.send(`Serveur répond: ${message}`);
@@ -24,11 +23,12 @@ export const initWebSocket = (httpServer) => {
     });
 };
 
-export const broadcastMessage = (message) => {
+export const broadcastPlayerMessage = (player) => {
     if (wss) {
         wss.clients.forEach(client => {
             if (client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify(message));
+                client.send(JSON.stringify(player));
+
             }
         });
     }
