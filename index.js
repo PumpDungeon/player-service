@@ -2,13 +2,16 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Player from './entities/player/index.js';
 import PublicEndpoints from './api/index.js';
+import cors from 'cors';
 import dotenv from 'dotenv';
 const app = express();
-const port = 3000;
+const port = 3002;
 
 dotenv.config();
 
 app.use(express.json());
+
+app.use(cors({}));
 
 app.use(PublicEndpoints);
 
