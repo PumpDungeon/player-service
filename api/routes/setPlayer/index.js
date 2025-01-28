@@ -10,8 +10,7 @@ export const setPlayer = async (req, res) => {
                 pv: playerData.pv,
                 lvl: playerData.lvl,
                 inventory: playerData.inventory,
-                gold: playerData.gold,
-                dps: playerData.dps
+                gold: playerData.gold
             },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );
