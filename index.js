@@ -2,8 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Player from './entities/player/index.js';
 import PublicEndpoints from './api/index.js';
+import { createServer } from 'http';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import {initWebSocket} from "./webSocket/index.js";
 const app = express();
 const port = 3002;
 
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use(cors({}));
 
 app.use(PublicEndpoints);
+const server = createServer(app);
+initWebSocket(server);
 
 mongoose.connect(process.env.MONGO_URL , {
     useNewUrlParser: true,
@@ -30,8 +34,9 @@ mongoose.connect(process.env.MONGO_URL , {
             console.log(`Collection '${Player.collection.name}' created`);
         }
 
-        app.listen(port, () => {
-            console.log(`Server running on http://localhost:${port}`);
+        server.listen(port, () => {
+            console.log(`Serveur actif sur http://localhost:${port}`);
+            console.log(`WebSocket actif sur ws://localhost:${port}`);
         });
     })
     .catch(err => console.error('MongoDB connection failed:', err));
