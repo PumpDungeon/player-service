@@ -65,15 +65,15 @@ async function setupRabbitMQConsumers() {
                     console.log(`Received message: ${JSON.stringify(messageContent)}`);
 
                     const updatedData = messageContent.player;
-                    const newPlayerData = JSON.stringify(updatedData)
                     console.log(`UpdateData received : ${JSON.stringify(updatedData)}`);
-                    const updatedPlayer = await Player.findOneAndUpdate(
-                        {},
+                    const updatedPlayer = await Player.updateOne(
+                        { _id: playerId },
                         {
-                            newPlayerData,
-                        },
-                        { new: true, upsert: true, setDefaultsOnInsert: true }
+                            gold: updatedData.gold,
+                        }
                     );
+
+                    console.log(`Player updated : ${updatedPlayer}`);
 
                     channel.ack(msg);
                 }

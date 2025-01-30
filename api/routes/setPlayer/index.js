@@ -3,11 +3,11 @@ import Player from '../../../entities/player/index.js';
 export const setPlayer = async (req, res) => {
     try {
         const playerData = req.body;
-
+        console.log('playerData to update : ', playerData);
         const updatedPlayer = await Player.findOneAndUpdate(
             {},
             {
-                playerData,
+                ...playerData
             },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );

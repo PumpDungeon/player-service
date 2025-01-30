@@ -12,6 +12,12 @@ playerSchema.post('findOneAndUpdate', function(doc) {
     broadcastPlayerMessage(doc);
 });
 
+playerSchema.post('updateOne', function(result) {
+    this.model.findOne(this.getQuery()).then(doc => {
+        broadcastPlayerMessage(doc);
+    });
+});
+
 const Player = mongoose.model('Player', playerSchema);
 
 export default Player;
