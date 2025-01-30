@@ -27,6 +27,7 @@ export const broadcastPlayerMessage = (player) => {
     if (wss) {
         wss.clients.forEach(client => {
             if (client.readyState === WebSocket.OPEN) {
+                console.log("Broadcasting player message: ", player);
                 client.send(JSON.stringify(player));
 
             }
