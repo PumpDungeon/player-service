@@ -7,10 +7,7 @@ export const setPlayer = async (req, res) => {
         const updatedPlayer = await Player.findOneAndUpdate(
             {},
             {
-                pv: playerData.pv,
-                lvl: playerData.lvl,
-                inventory: playerData.inventory,
-                gold: playerData.gold
+                playerData,
             },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );
